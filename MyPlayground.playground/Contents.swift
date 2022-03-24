@@ -70,22 +70,72 @@ func fibonacci(n: Int) -> [Int] {
 }
 
 print(fibonacci(n: 3))
- */
 
 
 
 
 
-var n = 20
+
+var n = 30
 var array = [Int]()
 for num in 2...n {
     array.append(num)
 }
-var p = array[0]
-for x in stride(from: 2 + p, to: n, by: p){
+
+// var p = array[0]
+
+func bitCoin (_ array: [Int]) -> [Int] {
+    var newArray = array
+    var p = newArray[0]
+    print(p)
+    while p <= newArray.endIndex {
+    for x in stride(from: 2 + p, to: n, by: p){
+        
+        if let index = newArray.firstIndex(of: x){
+            newArray.remove(at: index)
+            print(newArray)
+            continue
+        }
+        
+        if let index = array.first(where: {$0 > p}){
+            p = index
+            print(p)
+            break
+        }
+    }
+}
+    return newArray
+}
+
+
+let a = bitCoin(array)
+print(a)
+
+
+
+
+ for x in stride(from: 2 + p, to: n, by: p){
     if let index = array.firstIndex(of: x){
         array.remove(at: index)
     }
 }
 print(array)
+if let index = array.first(where: {$0 > p}){
+    p = index
+}
+print(p) */
 
+let n = 10000
+var bitCoin = Set(2...n)
+for velue in bitCoin {
+    var index = 2
+    while velue * index <= n {
+        bitCoin.remove(velue*index)
+        index += 1
+    }
+    index = 2
+}
+    
+print(bitCoin.sorted(by: <))
+print("+++++++")
+print(bitCoin.count)
