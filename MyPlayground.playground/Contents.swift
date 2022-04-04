@@ -1,5 +1,5 @@
 import UIKit
-
+/*
 
 enum Trans {case auto, manual}
 enum DoorState {case open, closw}
@@ -87,12 +87,135 @@ var qqq = SportCar(transmission: .auto, trailer: .no, windows: .open, power: .no
 qqq.action(action: .trailer(.yas))
 qqq.action(action: .power(.yas))
 
+=============
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+protocol Calkulate {
+    func calkulatePerimiter() -> Double
+}
+
+class Rectangle: Calkulate {
+    var sideA: Double
+    var sideB: Double
+    func calkulatePerimiter() -> Double {
+        return (sideA + sideB) * 2
+    }
+    init(sideA: Double, sideB: Double) {
+        self.sideA = sideA
+        self.sideB = sideB
+    }
+
+}
+class Circle: Calkulate {
+    var radius: Double
+    func calkulatePerimiter() -> Double {
+        return 2 * radius * .pi
+    }
+    init(radiue:Double){
+        self.radius = radiue
+    }
+}
 
 
 
+var figures: [Calkulate] = [
+Rectangle(sideA: 10, sideB: 12),
+Circle(radiue: 180)
+]
+
+for figure in figures {
+    let perimetr = figure.calkulatePerimiter()
+    print(perimetr)
+}
+ 
+ 
+ ==========
+ 
+ 
+
+class Hand {
+    let redPen = RedPen()
+    let bluePen = BluePen()
+    let marker = Marker()
+    let pero = Pero()
+}
+
+class RedPen {
+    func writeText(_ text: String) {
+        print("Pishem KRASNOJ pastoj \(text)")
+    }
+}
+
+class BluePen {
+    func writeText(_ text: String) {
+        print("Pishen SINEJ pastoj \(text)")
+    }
+}
+class Marker {
+    func writeText(_ text: String) {
+        print("Pishem MARKEROM")
+    }
+}
+
+class Pero {
+    func writeText(_ text: String) {
+        print("Pishem PEROM")
+    }
+}
+
+let hand = Hand()
+hand.redPen.writeText("gggg")
+ 
+ */
 
 
-    
-    
-    
-  
+protocol LetterBelonging {
+    func writeText(_ text: String)
+}
+
+
+class Hand {
+    var letterBelonging: LetterBelonging
+    func write(_ text: String) {
+        letterBelonging.writeText(text)
+    }
+    init(letterBelonging: LetterBelonging){
+        self.letterBelonging = letterBelonging
+    }
+}
+
+class RedPen: LetterBelonging {
+    func writeText(_ text: String) {
+        print("pishem KRASNOJ RUCHKOJ \(text)")
+    }
+}
+
+class BluePen: LetterBelonging {
+    func writeText(_ text: String) {
+        print("pishem SINEJ RUCHKOJ \(text)")
+    }
+}
+class Pencil: LetterBelonging {
+    func writeText(_ text: String) {
+        print("pishem KARANDASH \(text)")
+    }
+}
+
+class Marker: LetterBelonging {
+    func writeText(_ text: String) {
+        print("pishem MARKEROM \(text)")
+    }
+}
+
+let q = Hand(letterBelonging: Marker())
+q.write("g")
+q.letterBelonging.writeText("ww")
+//let hand = Hand(letterBelonging: Marker.init())
+//hand.write("111")
+//hand.letterBelonging.writeText("222")
+
