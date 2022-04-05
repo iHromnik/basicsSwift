@@ -171,7 +171,10 @@ class Pero {
 let hand = Hand()
 hand.redPen.writeText("gggg")
  
- */
+ ============
+ 
+ 
+ 
 
 
 protocol LetterBelonging {
@@ -180,13 +183,13 @@ protocol LetterBelonging {
 
 
 class Hand {
-    var letterBelonging: LetterBelonging
+    var letterBelonging: LetterBelonging?
     func write(_ text: String) {
-        letterBelonging.writeText(text)
+        letterBelonging?.writeText(text)
     }
-    init(letterBelonging: LetterBelonging){
-        self.letterBelonging = letterBelonging
-    }
+//    init(letterBelonging: LetterBelonging){
+//        self.letterBelonging = letterBelonging
+//    }
 }
 
 class RedPen: LetterBelonging {
@@ -212,10 +215,84 @@ class Marker: LetterBelonging {
     }
 }
 
-let q = Hand(letterBelonging: Marker())
-q.write("g")
-q.letterBelonging.writeText("ww")
+let q = Hand()
+q.letterBelonging = Marker()
+q.write("11")
+
+
+
 //let hand = Hand(letterBelonging: Marker.init())
 //hand.write("111")
 //hand.letterBelonging.writeText("222")
+
+==========
+
+
+
+
+*/
+
+
+enum Marka {
+    case audi, bmw, ford
+}
+
+enum OpenClose {
+    case open, close
+}
+
+enum StartStop {
+    case start, stop
+}
+
+protocol Car {
+    
+    var marca: Marka { get }
+   // var climatControl: Bool { get }
+    var door: OpenClose? { get set }
+    var window: OpenClose? { get set}
+    var enging: StartStop? { get set}
+    
+    func actionDo(_ door: OpenClose?, _ window: OpenClose?, _ enging: StartStop?)
+}
+
+//extension Car {
+//    mutating func openDoor(_ door: OpenClose?){
+//        self.door = .open
+//
+//    }
+//    mutating func openWindow(_ window: OpenClose?){
+//        self.window = .open
+//
+//    }
+//
+//    mutating func startEnging(_ enging: StartStop?){
+//        self.enging = .start
+//    }
+//}
+
+
+
+class tunkCar: Car {
+    var marca: Marka
+    //var climatControl: Bool
+    var door: OpenClose?
+    var window: OpenClose?
+    var enging: StartStop?
+    
+    
+    func actionDo(_ door: OpenClose?, _ window: OpenClose?, _ enging: StartStop?){
+    
+    }
+    
+    init(marka: Marka) {
+        self.marca = marka
+       // self.climatControl = climat
+        print(self.marca, self.door ?? .close, self.window ?? .close, self.enging ?? .stop)
+    }
+    
+}
+    
+var q = tunkCar(marka: .audi)
+q.actionDo(.open, .close, .start)
 
